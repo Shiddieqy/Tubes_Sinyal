@@ -1,19 +1,19 @@
-rec = 44;
-mic1 =1;
-mic2 = 4;
+rec = 51;
+mic1 =2;
+mic2 = 3;
 Audio1 = audioread("ZOOM00"+string(rec)+"/ZOOM00"+string(rec)+"_Tr"+string(mic1)+".WAV");
 Audio2 = audioread("ZOOM00"+string(rec)+"/ZOOM00"+string(rec)+"_Tr"+string(mic2)+".WAV");
-minsec = 30;
-maxsec = 36;
+minsec = 16;
+maxsec = 18.5;
 sampfreq = 48000;
 soundspeed = 343;
 nf = 0.008;
 Ts = 1/sampfreq;
 ts = minsec:Ts:maxsec;
 
-n = 50;
-W1 = 400/sampfreq;
-W2 = 2000/sampfreq;
+n = 5000;
+W1 = 1000/sampfreq;
+W2 = 1400/sampfreq;
 Wn = [W1 W2];
 b = fir1(n,Wn);
 Audio1 = normalize(Audio1);
