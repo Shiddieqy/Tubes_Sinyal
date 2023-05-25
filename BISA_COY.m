@@ -1,5 +1,6 @@
-[Audio1,fs] = audioread("ZOOM0045/ZOOM0045_Tr4.WAV");
-Audio2 = audioread("ZOOM0045/ZOOM0045_Tr3.WAV");
+rec = 45;
+Audio1 = audioread("ZOOM00"+string(rec)+"/ZOOM00"+string(rec)+"_Tr3.WAV");
+Audio2 = audioread("ZOOM00"+string(rec)+"/ZOOM00"+string(rec)+"_Tr4.WAV");
 minsec =42;
 maxsec = 60;
 sampfreq = 48000;
@@ -12,7 +13,7 @@ n = 50;
 Wn = 2000/sampfreq;
 b = fir1(n,Wn);
 Audio1 = normalize(Audio1);
-% Audio2 = normalize(Audio2);
+Audio2 = normalize(Audio2);
 Audio1 = filter(b,1,Audio1);
 Audio2 = filter(b,1,Audio2);
 
@@ -66,6 +67,9 @@ array = zeros(10);
 % end
 % distance = distance/10;
 distance
+x3 = circshift(Audio2,lag);
+figure(5)
+plot(ts,Audio1,ts,x3)
  
 
 
