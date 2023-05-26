@@ -1,14 +1,13 @@
 record = 51;
-% res =  [zeros(3,4) zeros(3,4) zeros(3,4) zeros(3,4) zeros(3,4) zeros(3,4) zeros(3,4) zeros(3,4) zeros(3,4) zeros(3,4) zeros(3,4) zeros(3,4) zeros(3,4) zeros(3,4)];
-res = zeros(6,14);
-minsec =28;
-maxsec = 31;
+res =  zeros(6,14);
+minsec = 16;
+maxsec = 28;
 sampfreq = 48000;
 soundspeed = 343;
 nf = 0.008;
 Ts = 1/sampfreq;
 ts = minsec:Ts:maxsec;
-n = 500;
+n = 3000;
 W1 = 1000/sampfreq;
 W2 = 1400/sampfreq;
 Wn = [W1 W2];
@@ -32,7 +31,7 @@ for seq = 1:14
 
             lag = finddelay(Audio1,Audio2);
             distance = lag/sampfreq*soundspeed;
-            res((pros-s,mic1,seq)=distance;
+            res(pros-(seq-1)*6,seq)=distance;
             fprintf("Process : %d / 84\n",pros)
             pros = pros+1;
         end
