@@ -1,29 +1,31 @@
 rec = 51;
-mic1 =2;
+mic1 =1;
 mic2 = 3;
-Audio1 = audioread("ZOOM00"+string(rec)+"/ZOOM00"+string(rec)+"_Tr"+string(mic1)+".WAV");
-Audio2 = audioread("ZOOM00"+string(rec)+"/ZOOM00"+string(rec)+"_Tr"+string(mic2)+".WAV");
+Audio1 = audioread("FIltered_7.2"+"/ZOOM00"+string(record)+"_Tr"+string(mic1)+".WAV");
+Audio2 = audioread("Filtered_7.2"+"/ZOOM00"+string(record)+"_Tr"+string(mic2)+".WAV");
+figure(6)
+plot(Audio1)
 minsec = 16;
-maxsec = 18.5;
+maxsec = 19;
 sampfreq = 48000;
 soundspeed = 343;
 nf = 0.008;
 Ts = 1/sampfreq;
 ts = minsec:Ts:maxsec;
 
-n = 5000;
+n = 500;
 W1 = 1000/sampfreq;
 W2 = 1400/sampfreq;
 Wn = [W1 W2];
 b = fir1(n,Wn);
 Audio1 = normalize(Audio1);
 Audio2 = normalize(Audio2);
-Audio1 = filter(b,1,Audio1);
-Audio2 = filter(b,1,Audio2);
+% Audio1 = filter(b,1,Audio1);
+% Audio2 = filter(b,1,Audio2);
 
-Audio1 = abs(Audio1);
-Audio2 = abs(Audio2);
-Delay = finddelay(Audio1,Audio2);
+% Audio1 = abs(Audio1);
+% Audio2 = abs(Audio2);
+
 % Audio1 = movmean(Audio1,300);
 % Audio2 = movmean(Audio2,300);
 % Audio1(Audio1<=nf) = 0;
@@ -39,7 +41,7 @@ Delay = finddelay(Audio1,Audio2);
 Audio1 = Audio1(minsec*sampfreq:maxsec*sampfreq);
 Audio2 = Audio2(minsec*sampfreq:maxsec*sampfreq);
 
-
+Delay = finddelay(Audio1,Audio2);
 [xcor,lags] = xcorr(Audio1,Audio2);
 
 xcor = abs(xcor);
